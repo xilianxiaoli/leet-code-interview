@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/28.实现-str-str.js"
+            "program": "${workspaceFolder}/795.区间子数组个数.js"
         }
     ]
 }

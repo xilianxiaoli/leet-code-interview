@@ -35,6 +35,10 @@ function TreeNode(val) {
 /**
  * @param {number[]} preorder
  * @param {number[]} inorder
+ * 前序遍历：根节点->左节点->右节点
+ * 中序遍历：左节点->根节点->右节点
+ * 可见 前序遍历数组的首元素就是根节点，那么我们根据这个根节点在中序遍历中找个该值，在根据可以划分出左右子树
+ * 然后递归构建左右树，直到叶子节点返回即可
  * @return {TreeNode}
  */
 var buildTree = function(preorder, inorder) {
@@ -53,10 +57,43 @@ var buildTree = function(preorder, inorder) {
         }
     }
     const root = new TreeNode(rootVal);
-    root.left = buildTree(preorder.slice(1, rootIndex), inorder.slice(0, rootIndex));
-    root.right = buildTree(preorder.slice(rootIndex), inorder.slice(rootIndex + 1));
+    root.left = buildTree(preorder.slice(1, rootIndex + 1), inorder.slice(0, rootIndex));
+    root.right = buildTree(preorder.slice(rootIndex + 1), inorder.slice(rootIndex + 1));
     return root
 };
-buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7])
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} preorder
+ * @param {number[]} inorder
+ * @return {TreeNode}
+ */
+var buildTree = function(preorder, inorder) {
+    let map = {}
+    let preIndex = 0
+    inorder.forEach((num, i) => (map[num] = i))
+    function helper(left, right) {
+        if (left > right) {
+            return null
+        }
+        let root_val = preorder[preIndex]
+        let root = new TreeNode(root_val)
+
+        let in_index = map[root_val]
+        preIndex++
+        root.left = helper(left, in_index - 1)
+        root.right = helper(in_index + 1, right)
+        return root
+    }
+    return helper(0, inorder.length - 1)
+};
+
+// buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7])
 // @lc code=end
 

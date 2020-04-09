@@ -57,3 +57,29 @@ function my() {
 }
 // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 // https://babeljs.io/repl#?browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABHEVEAoCUBvAUIgxAGwFM0wBDAWxMQF5EByFc6kx_Q0tCgJ17gB3AGLgI9DJjoA-PIXmIICAM5xSAOiJwA5uko1MnAgF8jiPgJFisuUyyxA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=es2015%2Creact%2Cstage-2%2Ces2015-loose&prettier=true&targets=&version=7.9.0&externalPlugins=
+
+// 箭头函数的转换
+
+function out() {
+    let name = 'out name'
+    let arrowFunc = ()=> {
+        console.log(this.name)
+    }
+    //若不绑定this，则调用该函数的就是 window 对象
+    arrowFunc()
+}
+// => es2015
+
+function out() {
+    // 用变量承载外层this
+    var _this = this;
+  
+    var name = "out name";
+    // 转换成常规函数
+    var arrowFunc = function arrowFunc() {
+      // 内部的this指针使用外部的this变量
+      console.log(_this.name);
+    }; //若不绑定this，则调用该函数的就是 window 对象
+  
+    arrowFunc();
+  }

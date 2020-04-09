@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/14.最长公共前缀"
+            "program": "${workspaceFolder}/62.不同路径"
         }
     ]
 }

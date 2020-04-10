@@ -8,8 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            // "program": "${workspaceFolder}/62.不同路径"
-            "program": "${workspaceFolder}/doc/demo"
+            "program": "${workspaceFolder}/63.不同路径-ii"
         }
     ]
 }

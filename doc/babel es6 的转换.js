@@ -1,5 +1,5 @@
 
-// 循环中的块级作用域
+//1.------------ 循环中的块级作用域
 function aa() {
     const a = 12;
     // for 循环中的块级作用域
@@ -28,7 +28,7 @@ function aa() {
     return a;
 }
 
-// const 的转换
+//2.------------ const 的转换
 const aa = 12;
 aa = 123
 
@@ -39,7 +39,7 @@ function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only")
 var aa = 12;
 aa = (_readOnlyError("aa"), 123);
 
-// 条件判断中的局部作用域
+//3.------------ 条件判断中的局部作用域
 function my() {
     let a = 23
     if (1) {
@@ -55,14 +55,12 @@ function my() {
         var _a = 12;
     }
 }
-// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-// https://babeljs.io/repl#?browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABHEVEAoCUBvAUIgxAGwFM0wBDAWxMQF5EByFc6kx_Q0tCgJ17gB3AGLgI9DJjoA-PIXmIICAM5xSAOiJwA5uko1MnAgF8jiPgJFisuUyyxA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=es2015%2Creact%2Cstage-2%2Ces2015-loose&prettier=true&targets=&version=7.9.0&externalPlugins=
 
-// 箭头函数的转换
+//4.------------ 箭头函数的转换
 
 function out() {
     let name = 'out name'
-    let arrowFunc = ()=> {
+    let arrowFunc = () => {
         console.log(this.name)
     }
     //若不绑定this，则调用该函数的就是 window 对象
@@ -73,13 +71,86 @@ function out() {
 function out() {
     // 用变量承载外层this
     var _this = this;
-  
+
     var name = "out name";
     // 转换成常规函数
     var arrowFunc = function arrowFunc() {
-      // 内部的this指针使用外部的this变量
-      console.log(_this.name);
+        // 内部的this指针使用外部的this变量
+        console.log(_this.name);
     }; //若不绑定this，则调用该函数的就是 window 对象
-  
+
     arrowFunc();
-  }
+}
+
+// 5.------------ class类的转换
+class MyClass {
+    constructor(params) {
+        this.pp = params
+    }
+    fn() {
+        console.log(this.pp)
+    }
+}
+// => es2015
+// 通过闭包的方式，新建对象
+/**
+ * 新建对象的构造函数就是 constructor 的内容
+ * 将 class 中的方法挂载到新对象的 prototype 原型链上
+ * 闭包函数最后将 构造函数输出
+ */
+var MyClass = /*#__PURE__*/ (function () {
+    function MyClass(params) {
+        this.pp = params;
+    }
+
+    var _proto = MyClass.prototype;
+
+    _proto.fn = function fn() {
+        console.log(this.pp);
+    };
+
+    return MyClass;
+})();
+
+// 6.------------ class类的继承
+class A {
+    constructor() {
+        this.aname = 'aname'
+    }
+}
+class B extends A {
+    constructor() {
+        super()
+        console.log(this.aname)
+    }
+}
+
+// => es2015
+function _inheritsLoose(subClass, superClass) {
+    subClass.prototype = Object.create(superClass.prototype);
+    subClass.prototype.constructor = subClass;
+    subClass.__proto__ = superClass;
+}
+
+var A = function A() {
+    this.aname = "aname";
+};
+
+var B = /*#__PURE__*/ (function (_A) {
+    _inheritsLoose(B, _A);
+
+    function B() {
+        var _this;
+
+        _this = _A.call(this) || this;
+        console.log(_this.aname);
+        return _this;
+    }
+
+    return B;
+})(A);
+
+
+async function fn(){
+    await ff()
+}

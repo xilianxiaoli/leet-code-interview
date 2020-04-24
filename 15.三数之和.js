@@ -10,13 +10,15 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-    // 排序
+    console.log(arguments)
+    // 第一步先排序，虽然花费一定的时间复杂度，但可以让后续的查找变成线性的，还可以利用相同的值紧挨着的特性，巧妙的去重
     const sortNums = nums.sort((a, b) => a - b)
     let list = []
     for (let i = 0; i < sortNums.length; i++) {
-        // 若当前值与前一位的值相同，那么就需要重复计算了，避免产生同样的结果
+        // 若当前值与前一位的值相同，那么就不需要重复计算了，避免产生同样的结果
         if (i > 0 && sortNums[i] === sortNums[i - 1]) continue
         const first = sortNums[i];
+        // 采用双指针，一个指向最小值，一个指向最大值，加快查找效率
         let L = i + 1;
         let R = sortNums.length - 1;
         while (L < R) {
@@ -45,6 +47,6 @@ var threeSum = function (nums) {
     // console.log(list)
     return list
 };
-// threeSum([-1, 0, 1, 2, -1, -4])
+threeSum([-1, 0, 1, 2, -1, -4])
 // @lc code=end
 

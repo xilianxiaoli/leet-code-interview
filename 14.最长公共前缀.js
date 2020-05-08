@@ -12,7 +12,7 @@
  * @param {string[]} strs
  * @return {string}
  */
-var longestCommonPrefix1 = function (strs) {
+var longestCommonPrefix = function (strs) {
     if (strs.length === 0) return ''
     let str = strs[0];
     const [one, ...list] = strs;
@@ -39,7 +39,7 @@ var longestCommonPrefix1 = function (strs) {
  * @param {*} strs
  * @returns
  */
-var longestCommonPrefix = function (strs) {
+var longestCommonPrefix1 = function (strs) {
     if (strs.length === 0) return '';
     if(strs.length === 1) return strs[0]
     let low = 0;
@@ -67,7 +67,7 @@ var longestCommonPrefix = function (strs) {
     }
 }
 console.log(longestCommonPrefix(["flower","flow","flight"]))
-console.log(longestCommonPrefix(["f","f"]))
-console.log(longestCommonPrefix(["f","r"]))
+// console.log(longestCommonPrefix(["f","f"]))
+// console.log(longestCommonPrefix(["f","r"]))
 // @lc code=end
 

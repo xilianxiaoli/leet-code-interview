@@ -43,4 +43,4 @@ var isValid = function(s) {
     return stackRight.length === 0
 
 };
-
+isValid("([)]")

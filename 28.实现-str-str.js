@@ -39,6 +39,7 @@ var strStr2 = function(haystack, needle) {
 
 };
 
+// 滑动窗口实现
 var strStr = function(haystack, needle) {
     if (!needle) {
         return 0

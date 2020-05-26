@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/20.有效的括号"
+            "program": "${workspaceFolder}/0.对象元素获取"
         }
     ]
 }
